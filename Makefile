@@ -41,6 +41,12 @@ win64:
 	x86_64-w64-mingw32-gcc -Ofast -D_WIN32 -o run.exe -I. run.c win.c
 	x86_64-w64-mingw32-gcc -Ofast -D_WIN32 -o runq.exe -I. runq.c win.c
 
+# compiles with Borland C++ 5.02 compiler for Windows 98
+.PHONY: win98
+win98:
+	bcc32 -WC -D_WIN32 -D__BORLANDC__ -o run.exe run.c win.c
+	bcc32 -WC -D_WIN32 -D__BORLANDC__ -o runq.exe runq.c win.c
+
 # compiles with gnu99 standard flags for amazon linux, coreos, etc. compatibility
 .PHONY: rungnu
 rungnu:
