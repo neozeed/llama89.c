@@ -1094,10 +1094,16 @@ int sample(Sampler* sampler, float* logits) {
 // utilities: time
 
 long time_in_ms() {
-    // return time in milliseconds, for benchmarking the model speed
-    struct timespec time;
-    clock_gettime(CLOCK_REALTIME, &time);
-    return time.tv_sec * 1000 + time.tv_nsec / 1000000;
+#if defined(_WIN32) && defined(__BORLANDC__)
+  // GetTickCount returns milliseconds since system startup
+  // It's 32-bit but wraps only after ~49 days
+  return (long)GetTickCount();
+#else
+  // Original implementation for other platforms
+  struct timespec time;
+  clock_gettime(CLOCK_REALTIME, &time);
+  return time.tv_sec * 1000 + time.tv_nsec / 1000000;
+#endif
 }
 
 // ----------------------------------------------------------------------------
@@ -1171,7 +1177,6 @@ void generate(Transformer *transformer, Tokenizer *tokenizer, Sampler *sampler, 
 
         if (start == 0) {
             start = time_in_ms();
-            printf("Started timing at %ld ms\n", start);
         }
     }
     printf("\n");
