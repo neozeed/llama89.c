@@ -1148,6 +1148,7 @@ void generate(Transformer *transformer, Tokenizer *tokenizer, Sampler *sampler, 
     printf("Encoded %d prompt tokens\n", num_prompt_tokens);
     printf("First token: %d\n", prompt_tokens[0]);
 
+    printf("Response:\n\n");
     // start the main loop
     start = 0;
     token = prompt_tokens[0];
@@ -1315,7 +1316,7 @@ void error_usage() {
 int main(int argc, char *argv[]) {
 
     // default parameters
-    char *checkpoint_path = NULL;  // e.g. out/model.bin
+    char *checkpoint_path = "stories260K.bin";  // e.g. out/model.bin
     char *tokenizer_path = "tok512.bin";
     float temperature = 1.0f;   // 0.0 = greedy deterministic. 1.0 = original. don't set higher
     float topp = 0.9f;          // top-p in nucleus sampling. 1.0 = off. 0.9 works well, but slower
@@ -1330,10 +1331,11 @@ int main(int argc, char *argv[]) {
     Sampler sampler;
 
     // poor man's C argparse so we can override the defaults above from the command line
-    if (argc >= 2) { checkpoint_path = argv[1]; } else { error_usage(); }
-    for (i = 2; i < argc; i+=2) {
+    if (argc >= 2 && argv[1][0] != '-') { checkpoint_path = argv[1]; } else { printf("Using default checkpoint: %s\n", checkpoint_path); }
+    for (i = 1; i < argc; i+=2) {
         // do some basic validation
         if (i + 1 >= argc) { error_usage(); } // must have arg after flag
+        if (i == 1 && argv[1][0] != '-') { continue; }
         if (argv[i][0] != '-') { error_usage(); } // must start with dash
         if (strlen(argv[i]) != 2) { error_usage(); } // must be -x (one dash, one letter)
         // read in the args
