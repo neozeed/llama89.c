@@ -1332,10 +1332,11 @@ int main(int argc, char *argv[]) {
 
     // poor man's C argparse so we can override the defaults above from the command line
     if (argc >= 2 && argv[1][0] != '-') { checkpoint_path = argv[1]; } else { printf("Using default checkpoint: %s\n", checkpoint_path); }
-    for (i = 1; i < argc; i+=2) {
+    i = 1;
+    while (i < argc) {
         // do some basic validation
-        if (i + 1 >= argc) { error_usage(); } // must have arg after flag
-        if (i == 1 && argv[1][0] != '-') { continue; }
+        if (i == 1 && argv[1][0] != '-') { i++; continue; }
+        else if (i + 1 >= argc) { error_usage(); } // must have arg after flag
         if (argv[i][0] != '-') { error_usage(); } // must start with dash
         if (strlen(argv[i]) != 2) { error_usage(); } // must be -x (one dash, one letter)
         // read in the args
@@ -1348,6 +1349,7 @@ int main(int argc, char *argv[]) {
         else if (argv[i][1] == 'm') { mode = argv[i + 1]; }
         else if (argv[i][1] == 'y') { system_prompt = argv[i + 1]; }
         else { error_usage(); }
+        i += 2;
     }
 
     // parameter validation/overrides
