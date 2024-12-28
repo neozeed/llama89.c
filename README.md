@@ -6,6 +6,16 @@
 
 A modified version of [llama2.c](https://github.com/karpathy/llama2.c) that runs on Windows 98.
 
+## results
+
+On a Windows 98 Pentium II Machine with 128MB RAM:
+
+| Model | Parameters | Tokens per Second |
+| --- | --- | --- |
+| stories260K (Llama-2) | 260K | 39.31 |
+| stories15M (Llama-2) | 15M | 1.03 |
+
+
 <p align="center">
   <img src="assets/windows98_llama_generation.jpg" width="300" height="300" alt="Windows 98 PC - Llama Generation">
 </p>
