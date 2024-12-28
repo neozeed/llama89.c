@@ -6,6 +6,10 @@
 
 A modified version of [llama2.c](https://github.com/karpathy/llama2.c) that runs on Windows 98.
 
+If it runs on 25-year-old hardware, then it runs anywhere.
+
+For details on how we got this running on Windows 98, check out our [blog post](https://blog.exolabs.net/day-4).
+
 ## results
 
 On a Windows 98 Pentium II Machine with 128MB RAM:
