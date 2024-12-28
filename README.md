@@ -1,7 +1,13 @@
-## llama2.c
+## llama98.c
 
 <p align="center">
-  <img src="assets/llama_cute.jpg" width="300" height="300" alt="Cute Llama">
+  <img src="assets/windows98-pc.png" width="300" height="300" alt="Windows 98 PC">
+</p>
+
+A modified version of [llama2.c](https://github.com/karpathy/llama2.c) that runs on Windows 98.
+
+<p align="center">
+  <img src="assets/windows98-llama-generation.png" width="300" height="300" alt="Windows 98 PC - Llama Generation">
 </p>
 
 Have you ever wanted to inference a baby [Llama 2](https://ai.meta.com/llama/) model in pure C? No? Well, now you can!
